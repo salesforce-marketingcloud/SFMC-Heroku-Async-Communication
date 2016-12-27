@@ -1,0 +1,11 @@
+--- node_modules/scp2/node_modules/ssh2-streams/lib/sftp.js	2016-07-14 02:19:06.000000000 -0500
++++ node_modules/scp2/node_modules/ssh2-streams/lib/sftp.js	2016-07-14 02:23:15.000000000 -0500
+@@ -2562,7 +2562,7 @@
+ 
+   // a little bit bigger buffer and water marks by default
+   if (options.highWaterMark === undefined)
+-    options.highWaterMark = 64 * 1024;
++    options.highWaterMark = 64 * 1024 - 1;
+ 
+   ReadableStream.call(this, options);
+ 

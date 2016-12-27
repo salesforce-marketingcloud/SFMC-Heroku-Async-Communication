@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+# Responsible for exporting data from the schema_name.export_table1 table into
+# a csv file.
+#
+# Given a path to store the csv, copy data from the schema_name.export_table1 table
+# into a csv file.
+
+# ARGUMENTS
+_FilePath="$1"
+
+# VARIABLES
+_Purl=${DATABASE_URL}
+_SQL="SELECT * from schema_name.export_table1 as t where t.exported is FALSE"
+
+# EXECUTION
+if [ -z "$_FilePath" ]
+then
+	echo "_FilePath is not set"
+	exit 1
+else
+	echo  "*** STARTED 'export_data' script - $( date +"%G-%m-%d_%H:%M:%S" ) ***"
+
+	psql $_Purl <<EOF
+	\copy ($_SQL) TO '$_FilePath' WITH csv HEADER DELIMITER AS ',';
+	UPDATE schema_name.export_table1 as t SET  t.exported = true WHERE t.exported is FALSE";
+EOF
+
+	echo  "*** FINISHED 'export_data' script - $( date +"%G-%m-%d_%H:%M:%S" ) ***"
+
+	# Exit successfully
+	exit 0
+fi

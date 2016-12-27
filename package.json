@@ -1,0 +1,42 @@
+{
+	"name": "sfmc-heroku-async-communication",
+	"description": "Asynchronous communication technique for Heroku and Marketing Cloud",
+	"version": "0.0.2",
+	"homepage": "",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com:salesforce-marketingcloud/SFMC-Heroku-Async-Communication.git"
+	},
+	"main": "server.js",
+	"scripts": {
+		"start": "node server.js",
+		"grunt": "grunt",
+		"watch": "grunt tswatch",
+		"test": "grunt default-test"
+	},
+	"devDependencies": {
+		"@types/node": "^6.0.50",
+		"rewire": "2.5.2",
+		"tslint": "3.11.0",
+		"typescript": "2.0.3",
+		"typings": "1.2.0",
+		"z-schema": "3.17.0"
+	},
+	"private": true,
+	"license": "Salesforce",
+	"dependencies": {
+		"adm-zip": "0.4.7",
+		"extend": "3.0.0",
+		"grunt": "0.4.5",
+		"grunt-cli": "1.2.0",
+		"grunt-contrib-clean": "1.0.0",
+		"grunt-contrib-copy": "1.0.0",
+		"grunt-contrib-jshint": "0.6.4",
+		"grunt-contrib-watch": "0.5.3",
+		"grunt-ts": "5.5.1",
+		"grunt-tslint": "3.1.0",
+		"logfmt": "1.2.0",
+		"q": "1.4.1",
+		"scp2": "file:./local_node_modules/scp2"
+	}
+}
