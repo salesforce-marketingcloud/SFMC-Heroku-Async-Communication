@@ -12,34 +12,72 @@ Once Typescript is working correctly through `typings install`
 you can then run it for the entire project through the following command
 at the base folder.
 
-	> grunt default-watch
+> grunt default-watch
 
 
 ** This will monitor local files in the `src` folder and generate them to the `build` directory **
 
-## Running the Project
+## Marketing Cloud to Heroku
 
 
-### Configuring Export Job
+### Marketing Cloud setup
+Make sure your Marketing Cloud account is provisioned with Mail, Automation Studio and Enhanced FTP.
 
-* 1111
-* 1111
-* 1111
+Navigate to Email app and then in top menu pick Interactions -> Data Extract.
 
-### Configuring Import Job
+![screenshot](docs/mcImgs/email.png)
 
-* 1111
-* 1111
-* 1111
+We will need to create three Data Exports.  In newly loaded page click Create.
 
+![screenshot](docs/mcImgs/mc_DataExtract.png)
 
-### Running Jobs
+Fill the form and click Save.  Repeat two more times.
+
+![screenshot](docs/mcImgs/de_export.png)
+
+![screenshot](docs/mcImgs/de_convert.png)
+
+![screenshot](docs/mcImgs/de_zip.png)
+
+You should have three data exports: Demo_Customers_Convert, Demo_Customers_Export, Demo_Customers_Zip.
+
+Navigate to File Transfers and click on Create
+
+![screenshot](docs/mcImgs/fileTransfer.png)
+
+Fill the form and click save.
+
+![screenshot](docs/mcImgs/fileTransfer_new.png)
+
+Navigate to Automation Studio
+
+![screenshot](docs/mcImgs/automationStudio.png)
+
+Create a new Scheduled Automation
+
+![screenshot](docs/mcImgs/automationStudio_new.png)
+
+In the newly loaded window switch to Workflow tab and select Activities from the toolbox on the right and drop them into the working area.
+
+![screenshot](docs/mcImgs/automationStudio_workflow.png)
+
+For each step slick in Choose and pick activity created earlier.
+* Step1 - Demo_Customers_Convert,
+* Step2 - Demo_Customers_Export,
+* Step3 - Demo_Customers_FileTransfer,
+* Step4 - Demo_Customers_Zip.
+
+Save it and click Run Once to verify Automation is working and file fil be moved to ftp location.
+
+### Heroku App setup
 
 * Ensure pg connection string is set in /src/script/export_data.ts and /src/script/load_data.ts
 * Ensure sftp credentials are set in /src/lib/fileManager.ts
 * run `grunt default-watch`
-* now your app is complied and to run it execute this `node /build/script/load_data.js` or this	`node /build/script/load_data.js` command
 
+### Running Jobs
+
+* now your app is complied, to run it execute `node /build/script/load_data.js`
 
 ## Troubleshooting
 
