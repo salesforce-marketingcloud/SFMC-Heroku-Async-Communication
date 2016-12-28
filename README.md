@@ -87,7 +87,7 @@ For each step slick in Choose and pick activity created earlier.
 * Step3 - `Demo_Customers_FileTransfer`,
 * Step4 - `Demo_Customers_Zip`.
 
-Save it and click Run Once to verify Automation is working and file fil be moved to ftp location.
+Save it and click Run Once to verify Automation is working and file will be moved to ftp location.
 
 ### Heroku App setup
 
@@ -191,7 +191,10 @@ Save it and then make sure it's active.
 ![screenshot](docs/mcImgs/active.png)
 
 
-click Run Once to verify Automation is working and file fil be moved to ftp location.
+### Running Job
+
+* now your Automation is set and you can send file from Heroku to Marketing Cloud.  Execute `node /build/script/export_data.js` to run it.
+
 
 ## Troubleshooting
 
