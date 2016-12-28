@@ -178,11 +178,20 @@ In the newly loaded window switch to Workflow tab and click on `Trigger Setup`
 
 ![screenshot](docs/mcImgs/trigger_setup.png)
 
+Then select Activities from the toolbox on the right and drop them into the working area.
+
+![screenshot](docs/mcImgs/automationStudio_workflow_import.png)
+
+For each step slick in Choose and pick activity created earlier.
+* Step1 - `Demo_Download_export_data.zip`,
+* Step2 - `Demo_export_data_import`,
+
+Save it and then make sure it's active.
+
+![screenshot](docs/mcImgs/active.png)
 
 
-select Activities from the toolbox on the right and drop them into the working area.
-
-
+click Run Once to verify Automation is working and file fil be moved to ftp location.
 
 ## Troubleshooting
 
