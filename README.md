@@ -11,8 +11,7 @@
 * [Heroku to Marketing Cloud](#heroku-to-marketing-cloud)
   * [Heroku App setup](#heroku-app-setup-1)
   * [Marketing Cloud setup](#marketing-cloud-setup-1)
-
-
+  * [Running Job](#running-job-1)
 * [Troubleshooting](#troubleshooting)
   * [Typescript error 1](#typescript-error-1)
   * [Cannot read property 'setUp' of null](#cannot-read-property-setup-of-null)
@@ -37,6 +36,10 @@ at the base folder.
 
 ## Marketing Cloud to Heroku
 
+Marketing Cloud to Heroku push is done in two steps:
+ * exporting DataExtention to zip file
+ * load this file to Heroku and upload it to db.
+
 ### Marketing Cloud setup
 Make sure your Marketing Cloud account is provisioned with Mail, Automation Studio and Enhanced FTP.
 
@@ -56,7 +59,7 @@ Fill the form and click Save.  Repeat two more times.
 
 ![screenshot](docs/mcImgs/de_zip.png)
 
-You should have three data exports: Demo_Customers_Convert, Demo_Customers_Export, Demo_Customers_Zip.
+You should have three data exports: `Demo_Customers_Convert`, `Demo_Customers_Export`, `Demo_Customers_Zip`.
 
 Navigate to File Transfers and click on Create
 
@@ -79,27 +82,27 @@ In the newly loaded window switch to Workflow tab and select Activities from the
 ![screenshot](docs/mcImgs/automationStudio_workflow.png)
 
 For each step slick in Choose and pick activity created earlier.
-* Step1 - Demo_Customers_Convert,
-* Step2 - Demo_Customers_Export,
-* Step3 - Demo_Customers_FileTransfer,
-* Step4 - Demo_Customers_Zip.
+* Step1 - `Demo_Customers_Convert`,
+* Step2 - `Demo_Customers_Export`,
+* Step3 - `Demo_Customers_FileTransfer`,
+* Step4 - `Demo_Customers_Zip`.
 
 Save it and click Run Once to verify Automation is working and file fil be moved to ftp location.
 
 ### Heroku App setup
 
-Once file is posted to FTP we can load it and then copy it to PG db.  Heroku app that is build for this was written on TypeScript which then compiled to node.js.  It is a good practice to write projects in TypeScript,  small slowness on the beginning in development will pay you off when your project will start growing.
+Once file is posted to FTP we can load it and then copy it to PG db.  Heroku app that is build for this was written on TypeScript which then compiled to node.js.  It is a good practice to write projects in TypeScript,  small slowness in the beginning in development will pay you off when your project will start growing.
 
-Usually you will run Export/Import as [one off dynos](https://devcenter.heroku.com/articles/one-off-dynos) [scheduled jobs](https://devcenter.heroku.com/articles/scheduler).
+Usually you will run Export/Import as [one off dynos](https://devcenter.heroku.com/articles/one-off-dynos) via [scheduled jobs](https://devcenter.heroku.com/articles/scheduler).
 
-* Ensure pg connection string is set in /src/script/export_data.ts and /src/script/load_data.ts
+* Ensure pg connection string is set in `/src/script/load_data.ts`
 * Ensure sftp credentials are set in /src/lib/fileManager.ts
-* setup in src/script/load_data.ts
+* variables in `src/script/load_data.ts`
   * `pgConnectionString` is variable to store PG connection string
   * `sourceFileName` is variable to store file name in ftp folder
   * `sourceFilePath` is variable to store file path on ftp
 
-* changes to src/script/load_data.sh
+* changes to `src/script/load_data.sh`
   * `_TableName` - schema.table_name value where to load data
   * `_TableFields` - comma separated list of fields which also should match columns in csv file.
 
@@ -112,7 +115,24 @@ Usually you will run Export/Import as [one off dynos](https://devcenter.heroku.c
 
 ## Heroku to Marketing Cloud
 
+Heroku to Marketing Cloud push is done in two steps:
+ * exporting PG table to zip file and uploading it to Marketing Cloud
+ * starting Automation Studio trigger and loading data to DataExtention
+
 ### Heroku App setup
+
+* Ensure pg connection string is set in `/src/script/export_data.ts`
+* Ensure sftp credentials are set in /src/lib/fileManager.ts
+* variables in `src/script/export_data.ts`
+  * `pgConnectionString` is variable to store PG connection string
+  * `sourceFileName` is variable to store file name that will be uploaded to ftp folder
+  * `destinationFileZipPath` is variable to store file path on ftp
+
+* changes to `src/script/export_data.sh`
+  * `_SQL` - sql query that generates data to export
+
+* run `grunt default-watch` to compile TypeScript
+
 
 ### Marketing Cloud setup
 

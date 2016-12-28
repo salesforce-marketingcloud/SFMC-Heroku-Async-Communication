@@ -11,7 +11,7 @@ _FilePath="$1"
 # VARIABLES
 _Purl=${DATABASE_URL}
 _Purl="${2:-$_Purl}"
-_SQL="SELECT * from schema_name.export_table1 as t where t.exported is FALSE"
+_SQL="SELECT * from schema_name.export_table1 as t"
 
 # EXECUTION
 if [ -z "$_FilePath" ]
@@ -23,7 +23,6 @@ else
 
 	psql $_Purl <<EOF
 	\copy ($_SQL) TO '$_FilePath' WITH csv HEADER DELIMITER AS ',';
-	UPDATE schema_name.export_table1 as t SET  t.exported = true WHERE t.exported is FALSE";
 EOF
 
 	echo  "*** FINISHED 'export_data' script - $( date +"%G-%m-%d_%H:%M:%S" ) ***"

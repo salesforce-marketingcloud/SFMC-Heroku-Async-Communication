@@ -21,7 +21,7 @@ var helpers = require('../lib/helpers');
 let pgConnectionString = 'postgres://****************:****************@****************.compute-1.amazonaws.com:5432/****************';
 
 let sourceDir = '.';
-let sourceFileName = `rmresult`;
+let sourceFileName = `export_data`;
 let sourceFileNameCSV = `${sourceFileName}.csv`;
 let sourceFileNameZip = `${sourceFileName}.zip`;
 let sourceFileCSVPath = `${sourceDir}/${sourceFileNameCSV}`;
