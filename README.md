@@ -7,12 +7,11 @@
 * [Marketing Cloud to Heroku](#marketing-cloud-to-heroku)
   * [Marketing Cloud setup](#marketing-cloud-setup)
   * [Heroku App setup](#heroku-app-setup)
-  * [Running Jobs](#running-jobs)
+  * [Running Job](#running-job)
 * [Troubleshooting](#troubleshooting)
   * [Typescript error 1](#typescript-error-1)
   * [Cannot read property 'setUp' of null](#cannot-read-property-setup-of-null)
 
------
 
 ## Getting Started
 Install packages
@@ -31,10 +30,7 @@ at the base folder.
 
 ** This will monitor local files in the `src` folder and generate them to the `build` directory **
 
------
-
 ## Marketing Cloud to Heroku
-
 
 ### Marketing Cloud setup
 Make sure your Marketing Cloud account is provisioned with Mail, Automation Studio and Enhanced FTP.
@@ -102,13 +98,18 @@ Usually you will run Export/Import as [one off dynos](https://devcenter.heroku.c
   * `_TableName` - schema.table_name value where to load data
   * `_TableFields` - comma separated list of fields which also should match columns in csv file.
 
-* run `grunt default-watch`
+* run `grunt default-watch` to compile TypeScript
 
 ### Running Job
 
-* now your app is complied, to run it execute `node /build/script/load_data.js`
+* now your app is complied, execute `node /build/script/load_data.js` to run it
 
------
+
+## Heroku to Marketing Cloud
+
+### Heroku App setup
+
+### Marketing Cloud setup
 
 ## Troubleshooting
 
