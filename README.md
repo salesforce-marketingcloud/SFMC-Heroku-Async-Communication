@@ -8,6 +8,11 @@
   * [Marketing Cloud setup](#marketing-cloud-setup)
   * [Heroku App setup](#heroku-app-setup)
   * [Running Job](#running-job)
+* [Heroku to Marketing Cloud](#heroku-to-marketing-cloud)
+  * [Heroku App setup](#heroku-app-setup-1)
+  * [Marketing Cloud setup](#marketing-cloud-setup-1)
+
+
 * [Troubleshooting](#troubleshooting)
   * [Typescript error 1](#typescript-error-1)
   * [Cannot read property 'setUp' of null](#cannot-read-property-setup-of-null)
