@@ -136,6 +136,54 @@ Heroku to Marketing Cloud push is done in two steps:
 
 ### Marketing Cloud setup
 
+Make sure your Marketing Cloud account is provisioned with Mail, Automation Studio and Enhanced FTP.
+
+Navigate to Email app.
+
+![screenshot](docs/mcImgs/email.png)
+
+Navigate to Admin and then on the right side click on Data Management -> File Locations.  We will create/find location from where Marketing Cloud will load exported from Heroku file.
+
+![screenshot](docs/mcImgs/admin.png)
+
+Find/Create location where `Location Type` is Enhanced FTP Site Import Directory
+
+![screenshot](docs/mcImgs/Enhanced_FTP_Site_Import_Directory.png)
+
+In top menu pick Interactions -> File Transfer and then click on Create
+
+![screenshot](docs/mcImgs/fileTransfer.png)
+
+Fill the form.
+
+![screenshot](docs/mcImgs/Demo_Download_export_data.png)
+
+Navigate to Interactions->Import and then click Create
+
+![screenshot](docs/mcImgs/Interactions_Import.png)
+
+Fill the form
+
+![screenshot](docs/mcImgs/Demo_export_data_import.png)
+
+Navigate to Automation Studio
+
+![screenshot](docs/mcImgs/automationStudio.png)
+
+Create a new Triggered Automation
+
+![screenshot](docs/mcImgs/automationStudio_new.png)
+
+In the newly loaded window switch to Workflow tab and click on `Trigger Setup`
+
+![screenshot](docs/mcImgs/trigger_setup.png)
+
+
+
+select Activities from the toolbox on the right and drop them into the working area.
+
+
+
 ## Troubleshooting
 
 #### Typescript error 1
