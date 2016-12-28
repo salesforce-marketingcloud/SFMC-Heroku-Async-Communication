@@ -1,5 +1,19 @@
 # Asynchronous communication technique for Heroku and Marketing Cloud
 
+
+## Table of Contents
+
+* [Getting Started](Ggetting-started)
+* [Marketing Cloud to Heroku](#marketing-cloud-to-heroku)
+  * [Marketing Cloud setup](#marketing-cloud-setup)
+  * [Heroku App setup](#heroku-app-setup)
+  * [Running Jobs](#running-jobs)
+* [Troubleshooting](#troubleshooting)
+  * [Typescript error 1](#typescript-error-1)
+  * [Cannot read property 'setUp' of null](#cannot-read-property-setup-of-null)
+
+-----
+
 ## Getting Started
 Install packages
   - `npm install`
@@ -7,7 +21,7 @@ Install packages
   - `npm install -g typings`
   - `typings install`
 
------
+
 Once Typescript is working correctly through `typings install`
 you can then run it for the entire project through the following command
 at the base folder.
@@ -16,6 +30,8 @@ at the base folder.
 
 
 ** This will monitor local files in the `src` folder and generate them to the `build` directory **
+
+-----
 
 ## Marketing Cloud to Heroku
 
@@ -85,14 +101,14 @@ Usually you will run Export/Import as [one off dynos](https://devcenter.heroku.c
 * changes to src/script/load_data.sh
   * `_TableName` - schema.table_name value where to load data
   * `_TableFields` - comma separated list of fields which also should match columns in csv file.
-  * `_OldTableName` - temporary table name
-
 
 * run `grunt default-watch`
 
-### Running Jobs
+### Running Job
 
 * now your app is complied, to run it execute `node /build/script/load_data.js`
+
+-----
 
 ## Troubleshooting
 
