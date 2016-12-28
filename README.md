@@ -24,13 +24,7 @@ Install packages
   - `npm install -g typings`
   - `typings install`
 
-
-Once Typescript is working correctly through `typings install`
-you can then run it for the entire project through the following command
-at the base folder.
-
 > grunt default-watch
-
 
 ** This will monitor local files in the `src` folder and generate them to the `build` directory **
 
