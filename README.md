@@ -71,8 +71,23 @@ Save it and click Run Once to verify Automation is working and file fil be moved
 
 ### Heroku App setup
 
+Once file is posted to FTP we can load it and then copy it to PG db.  Heroku app that is build for this was written on TypeScript which then compiled to node.js.  It is a good practice to write projects in TypeScript,  small slowness on the beginning in development will pay you off when your project will start growing.
+
+Usually you will run Export/Import as [one off dynos](https://devcenter.heroku.com/articles/one-off-dynos) [scheduled jobs](https://devcenter.heroku.com/articles/scheduler).
+
 * Ensure pg connection string is set in /src/script/export_data.ts and /src/script/load_data.ts
 * Ensure sftp credentials are set in /src/lib/fileManager.ts
+* setup in src/script/load_data.ts
+  * `pgConnectionString` is variable to store PG connection string
+  * `sourceFileName` is variable to store file name in ftp folder
+  * `sourceFilePath` is variable to store file path on ftp
+
+* changes to src/script/load_data.sh
+  * `_TableName` - schema.table_name value where to load data
+  * `_TableFields` - comma separated list of fields which also should match columns in csv file.
+  * `_OldTableName` - temporary table name
+
+
 * run `grunt default-watch`
 
 ### Running Jobs
@@ -85,6 +100,7 @@ Save it and click Run Once to verify Automation is working and file fil be moved
 
 If you run into the following error:
 
+```
 	typings/globals/require/index.d.ts(367,13): error TS2403: Subsequent variable declarations must have the same type.  Variable 'require' must be of type 'NodeRequire', but here has type 'Require'.
 
 	>> 1 non-emit-preventing type warning
@@ -92,6 +108,7 @@ If you run into the following error:
 	Warning: Task "ts:app" failed. Use --force to continue.
 
 	Aborted due to warnings.
+```
 
 screenshot:
 ![screenshot](docs/images/TypeScriptError1.jpg)
@@ -109,6 +126,7 @@ To fix this, remove the following line, from `typings/index.d.s`
 
 If you run into the following error:
 
+```
 	not ok 1 - TypeError: Cannot read property 'setUp' of null
 	  ---
 	  at:
@@ -137,7 +155,7 @@ If you run into the following error:
 	  message: 'TypeError: Cannot read property ''setUp'' of null'
 	  source: |
 	    if (group.setUp) {
-
+```
 ###### Resolution
 
 The issue is due to a missing null check in the nodeunit core.js file.

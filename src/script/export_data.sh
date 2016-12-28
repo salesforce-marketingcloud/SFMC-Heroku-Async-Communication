@@ -10,6 +10,7 @@ _FilePath="$1"
 
 # VARIABLES
 _Purl=${DATABASE_URL}
+_Purl="${2:-$_Purl}"
 _SQL="SELECT * from schema_name.export_table1 as t where t.exported is FALSE"
 
 # EXECUTION
