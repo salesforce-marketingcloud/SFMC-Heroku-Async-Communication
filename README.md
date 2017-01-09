@@ -4,11 +4,11 @@
 ## Table of Contents
 
 * [Getting Started](Ggetting-started)
-* [Marketing Cloud to Heroku](#marketing-cloud-to-heroku)
+* [From Marketing Cloud to Heroku](#marketing-cloud-to-heroku)
   * [Marketing Cloud setup](#marketing-cloud-setup)
   * [Heroku App setup](#heroku-app-setup)
   * [Running Job](#running-job)
-* [Heroku to Marketing Cloud](#heroku-to-marketing-cloud)
+* [From Heroku to Marketing Cloud](#heroku-to-marketing-cloud)
   * [Heroku App setup](#heroku-app-setup-1)
   * [Marketing Cloud setup](#marketing-cloud-setup-1)
   * [Running Job](#running-job-1)
@@ -30,22 +30,22 @@ Install packages
 
 ## Marketing Cloud to Heroku
 
-Marketing Cloud to Heroku push is done in two steps:
+Marketing Cloud push to Heroku is done in two steps:
  * exporting DataExtention to zip file
- * load this file to Heroku and upload it to db.
+ * loading this file to Heroku and uploading it to the PostgreSQL.
 
 ### Marketing Cloud setup
 Make sure your Marketing Cloud account is provisioned with Mail, Automation Studio and Enhanced FTP.
 
-Navigate to Email app and then in top menu pick Interactions -> Data Extract.
+Navigate to Email app and pick `Interactions` -> `Data Extract` in the top menu.
 
 ![screenshot](docs/mcImgs/email.png)
 
-We will need to create three Data Exports.  In newly loaded page click Create.
+Create three Data Exports.  To get started click `Create`.
 
 ![screenshot](docs/mcImgs/mc_DataExtract.png)
 
-Fill the form and click Save.  Repeat two more times.
+Fill the form and click `Save`.  Repeat twice more.
 
 ![screenshot](docs/mcImgs/de_export.png)
 
@@ -53,13 +53,13 @@ Fill the form and click Save.  Repeat two more times.
 
 ![screenshot](docs/mcImgs/de_zip.png)
 
-You should have three data exports: `Demo_Customers_Convert`, `Demo_Customers_Export`, `Demo_Customers_Zip`.
+The output is three data exports: `Demo_Customers_Convert`, `Demo_Customers_Export`, `Demo_Customers_Zip`.
 
-Navigate to File Transfers and click on Create
+Navigate to `File Transfers` and click `Create`
 
 ![screenshot](docs/mcImgs/fileTransfer.png)
 
-Fill the form and click save.
+Fill the form and click `Save`.
 
 ![screenshot](docs/mcImgs/fileTransfer_new.png)
 
@@ -71,59 +71,58 @@ Create a new Scheduled Automation
 
 ![screenshot](docs/mcImgs/automationStudio_new.png)
 
-In the newly loaded window switch to Workflow tab and select Activities from the toolbox on the right and drop them into the working area.
+Switch to `Workflow` tab and select `Activities` from the toolbox on the right and drop them into the working area.
 
 ![screenshot](docs/mcImgs/automationStudio_workflow.png)
 
-For each step slick in Choose and pick activity created earlier.
-* Step1 - `Demo_Customers_Convert`,
-* Step2 - `Demo_Customers_Export`,
-* Step3 - `Demo_Customers_FileTransfer`,
-* Step4 - `Demo_Customers_Zip`.
+For each step click `Choose` and pick activity created earlier.
+* Step 1 - `Demo_Customers_Convert`,
+* Step 2 - `Demo_Customers_Export`,
+* Step 3 - `Demo_Customers_FileTransfer`,
+* Step 4 - `Demo_Customers_Zip`.
 
-Save it and click Run Once to verify Automation is working and file will be moved to ftp location.
+Save and click `Run Once` to verify that Automation is working.  File will be moved to an ftp location.
 
 ### Heroku App setup
 
-Once file is posted to FTP we can load it and then copy it to PG db.  Heroku app that is build for this was written on TypeScript which then compiled to node.js.  It is a good practice to write projects in TypeScript,  small slowness in the beginning in development will pay you off when your project will start growing.
+Once the file is posted to FTP it can be loaded and copied to PostgreSQL.
 
-Usually you will run Export/Import as [one off dynos](https://devcenter.heroku.com/articles/one-off-dynos) via [scheduled jobs](https://devcenter.heroku.com/articles/scheduler).
+Typically Export/Import jobs are run as [one off dynos](https://devcenter.heroku.com/articles/one-off-dynos) via [scheduled jobs](https://devcenter.heroku.com/articles/scheduler).
 
 * Ensure pg connection string is set in `/src/script/load_data.ts`
-* Ensure sftp credentials are set in /src/lib/fileManager.ts
-* variables in `src/script/load_data.ts`
-  * `pgConnectionString` is variable to store PG connection string
-  * `sourceFileName` is variable to store file name in ftp folder
-  * `sourceFilePath` is variable to store file path on ftp
-
+* Ensure sftp credentials are set in `/src/lib/fileManager.ts`
+* Variables in `src/script/load_data.ts`:
+  * `pgConnectionString` - to store PG connection string
+  * `sourceFileName` - to store file name in sftp folder
+  * `sourceFilePath` - to store file path on sftp
 * changes to `src/script/load_data.sh`
   * `_TableName` - schema.table_name value where to load data
-  * `_TableFields` - comma separated list of fields which also should match columns in csv file.
+  * `_TableFields` - comma separated list of fields which should match columns in the csv file.
 
 * run `grunt default-watch` to compile TypeScript
 
 ### Running Job
 
-* now your app is complied, execute `node /build/script/load_data.js` to run it
+* Once the app is compiled, execute `node /build/script/load_data.js` to run it.
 
 
 ## Heroku to Marketing Cloud
 
-Heroku to Marketing Cloud push is done in two steps:
+Heroku push to Marketing Cloud is done in two steps:
  * exporting PG table to zip file and uploading it to Marketing Cloud
  * starting Automation Studio trigger and loading data to DataExtention
 
 ### Heroku App setup
 
 * Ensure pg connection string is set in `/src/script/export_data.ts`
-* Ensure sftp credentials are set in /src/lib/fileManager.ts
-* variables in `src/script/export_data.ts`
-  * `pgConnectionString` is variable to store PG connection string
-  * `sourceFileName` is variable to store file name that will be uploaded to ftp folder
-  * `destinationFileZipPath` is variable to store file path on ftp
+* Ensure sftp credentials are set in `/src/lib/fileManager.ts`
+* variables in `src/script/export_data.ts`:
+  * `pgConnectionString` - to store PG connection string
+  * `sourceFileName` - to store file name that will be uploaded to ftp folder
+  * `destinationFileZipPath` - to store file path on ftp
 
 * changes to `src/script/export_data.sh`
-  * `_SQL` - sql query that generates data to export
+  * `_SQL` - sql query that generates data for export
 
 * run `grunt default-watch` to compile TypeScript
 
@@ -136,7 +135,7 @@ Navigate to Email app.
 
 ![screenshot](docs/mcImgs/email.png)
 
-Navigate to Admin and then on the right side click on Data Management -> File Locations.  We will create/find location from where Marketing Cloud will load exported from Heroku file.
+Navigate to Admin and then click on Data Management on the right side -> File Locations.  We will create/find location from where Marketing Cloud will load exported file from Heroku.
 
 ![screenshot](docs/mcImgs/admin.png)
 
@@ -176,18 +175,18 @@ Then select Activities from the toolbox on the right and drop them into the work
 
 ![screenshot](docs/mcImgs/automationStudio_workflow_import.png)
 
-For each step slick in Choose and pick activity created earlier.
+For each step slick on 'Choose' and pick activity created earlier.
 * Step1 - `Demo_Download_export_data.zip`,
 * Step2 - `Demo_export_data_import`,
 
-Save it and then make sure it's active.
+Save and make sure it's active.
 
 ![screenshot](docs/mcImgs/active.png)
 
 
 ### Running Job
 
-* now your Automation is set and you can send file from Heroku to Marketing Cloud.  Execute `node /build/script/export_data.js` to run it.
+* now your Automation is set and you can send the file from Heroku to Marketing Cloud.  Execute `node /build/script/export_data.js` to run it.
 
 
 ## Troubleshooting
