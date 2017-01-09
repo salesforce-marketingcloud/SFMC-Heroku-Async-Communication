@@ -15,7 +15,7 @@
 * [Troubleshooting](#troubleshooting)
   * [Typescript error 1](#typescript-error-1)
   * [Cannot read property 'setUp' of null](#cannot-read-property-setup-of-null)
-
+* [Contributors](#Contributors)
 
 ## Getting Started
 Install packages
@@ -266,3 +266,6 @@ You can likely only find out which one it is by adding the following line at:
 See here for more information:
 [https://github.com/caolan/nodeunit/issues/198](https://github.com/caolan/nodeunit/issues/198)
 
+Contributors
+------------
+<table id="contributors"><tr><td><img src=https://avatars1.githubusercontent.com/u/1087729?v=3&s=200><a href="https://github.com/paulroth3d">paulroth3d</a></td><td><img src=https://avatars1.githubusercontent.com/u/1685720?v=3&s=200><a href="https://github.com/JesseDavid">JesseDavid</a></td><td><img src=https://avatars1.githubusercontent.com/u/1703275?v=3&s=200><a href="https://github.com/cherchyk">cherchyk</a></td></tr></table>
