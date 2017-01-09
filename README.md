@@ -4,11 +4,11 @@
 ## Table of Contents
 
 * [Getting Started](Ggetting-started)
-* [From Marketing Cloud to Heroku](#marketing-cloud-to-heroku)
+* [From Marketing Cloud to Heroku](#from-marketing-cloud-to-heroku)
   * [Marketing Cloud setup](#marketing-cloud-setup)
   * [Heroku App setup](#heroku-app-setup)
   * [Running Job](#running-job)
-* [From Heroku to Marketing Cloud](#heroku-to-marketing-cloud)
+* [From Heroku to Marketing Cloud](#from-heroku-to-marketing-cloud)
   * [Heroku App setup](#heroku-app-setup-1)
   * [Marketing Cloud setup](#marketing-cloud-setup-1)
   * [Running Job](#running-job-1)
@@ -28,7 +28,7 @@ Install packages
 
 ** This will monitor local files in the `src` folder and generate them to the `build` directory **
 
-## Marketing Cloud to Heroku
+## From Marketing Cloud to Heroku
 
 Marketing Cloud push to Heroku is done in two steps:
  * exporting DataExtention to zip file
@@ -106,7 +106,7 @@ Typically Export/Import jobs are run as [one off dynos](https://devcenter.heroku
 * Once the app is compiled, execute `node /build/script/load_data.js` to run it.
 
 
-## Heroku to Marketing Cloud
+## From Heroku to Marketing Cloud
 
 Heroku push to Marketing Cloud is done in two steps:
  * exporting PG table to zip file and uploading it to Marketing Cloud
