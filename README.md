@@ -268,4 +268,10 @@ See here for more information:
 
 Contributors
 ------------
-<table id="contributors"><tr><td><img src=https://avatars1.githubusercontent.com/u/1087729?v=3&s=200><a href="https://github.com/paulroth3d">paulroth3d</a></td><td><img src=https://avatars1.githubusercontent.com/u/1685720?v=3&s=200><a href="https://github.com/JesseDavid">JesseDavid</a></td><td><img src=https://avatars1.githubusercontent.com/u/1703275?v=3&s=200><a href="https://github.com/cherchyk">cherchyk</a></td></tr></table>
+<table id="contributors"><tr>
+<td><img src=https://avatars1.githubusercontent.com/u/1703275?v=3&s=200><a href="https://github.com/cherchyk">cherchyk</a></td>
+
+<td><img src=https://avatars1.githubusercontent.com/u/1685720?v=3&s=200><a href="https://github.com/JesseDavid">JesseDavid</a></td>
+
+<td><img src=https://avatars1.githubusercontent.com/u/1087729?v=3&s=200><a href="https://github.com/paulroth3d">paulroth3d</a></td>
+</tr></table>
